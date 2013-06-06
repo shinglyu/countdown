@@ -27,12 +27,13 @@ var gTime = {
       this.sec  = 0;
    },
    toHhmmss: function(){ return sec2hhssmm(this.toSec()); },
-   /*needFix: function(){
+   needFix: function(){
       //if (this.hour > 24 || this.hour < 0) {return true;}
       if (this.min  > 60 || this.min  < 0) {return true;}
       if (this.sec  > 60 || this.sec  < 0) {return true;}
       return false;
    },
+   /*
    fix: function(){
       //if (this.hour > 24) {this.hour = 24;}
       if (this.min  > 60) {this.min  = 59;}
@@ -53,7 +54,9 @@ var countdownToFunc = function(func, remainTimeSec, toSec){
                       //1000);
        }
        else { //time's up!
-          $('#countdown').text(sec2hhmmss(remainTimeSec));
+          $("#countdown").text(sec2hhmmss(remainTimeSec));
+          //clearInterval(runningTimer);
+          $("#resetBtn").click();
           func.apply() 
        } 
     },
@@ -167,3 +170,4 @@ Mousetrap.bind("7", function() { $("#7").click() });
 Mousetrap.bind("8", function() { $("#8").click() });
 Mousetrap.bind("9", function() { $("#9").click() });
 Mousetrap.bind("enter", function() { $("#startBtn").click() });
+Mousetrap.bind("del", function() { $("#clearBtn").click() });

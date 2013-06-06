@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -15,9 +16,9 @@
             <source id="oggsrc", type="audio/ogg" >
         </audio>
         <button id="startBtn" onclick="countdown(gTime.toSec())"> Start</button>
-        <button onclick="reset()"> Reset</button>
+        <button id="resetBtn" onclick="reset()"> Reset</button>
         <br />
-        <button onclick="clearTime()"> Clear</button>
+        <button id="clearBtn" onclick="clearTime()"> Clear</button>
         <br />
         <br />
         <button class="numBtn" id="1">1</button>
@@ -33,6 +34,14 @@
         <button class="numBtn" id="9">9</button>
         <br />
         <button class="numBtn" id="0">0</button>
+        <div id="help">
+           <p >Keyboard Shortcuts:<br/>
+              <strong>0~9</strong>: numbers <br/>
+              <strong>Enter</strong>: Start<br/>
+              <strong>Delete</strong>: Clear<br/>
+           </p>
+           
+        </div>
         <p id="credit">By Shing Lyu, shing.lyu@gmail.com</p>
 
         <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>-->
