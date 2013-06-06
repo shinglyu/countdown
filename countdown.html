@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Countdown Timer</title>
+
+    <link rel="stylesheet" href="countdown.css" type="text/css" />
+
+</head>
+    <body>
+        <p id="errorMsg">hi</p>
+        <h1 id="countdown">10</h1>
+        <audio id="player1">
+            <source id="mp3src", type="audio/mp3" >
+            <source id="oggsrc", type="audio/ogg" >
+        </audio>
+        <button id="startBtn" onclick="countdown(gTime.toSec())"> Start</button>
+        <button onclick="reset()"> Reset</button>
+        <br />
+        <button onclick="clearTime()"> Clear</button>
+        <br />
+        <br />
+        <button class="numBtn" id="1">1</button>
+        <button class="numBtn" id="2">2</button>
+        <button class="numBtn" id="3">3</button>
+        <br />
+        <button class="numBtn" id="4">4</button>
+        <button class="numBtn" id="5">5</button>
+        <button class="numBtn" id="6">6</button>
+        <br />
+        <button class="numBtn" id="7">7</button>
+        <button class="numBtn" id="8">8</button>
+        <button class="numBtn" id="9">9</button>
+        <br />
+        <button class="numBtn" id="0">0</button>
+        <p id="credit">By Shing Lyu, shing.lyu@gmail.com</p>
+
+        <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>-->
+       <script src="jquery-2.0.0.min.js" type="text/javascript"></script>
+       <script src="timer.js" type="text/javascript"></script>
+    </body>
+    <!--[if lte IE 8]>
+    <script type="text/javascript">
+       alert("NO! We don't support IE 8 or below. Go get Firefox or Chorme!")
+    </script>
+    <![endif]-->
+</html>
+
