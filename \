@@ -4,9 +4,7 @@ var gTime = {
    min:  0,
    sec:  0,
    toString: function(){
-      return padZero(this.hour,"00") 
-             + padZero(this.min, "00") 
-             + padZero(this.sec, "00");
+      return padZero(this.hour,"00") + padZero(this.min, "00") + padZero(this.sec, "00");
    },
    setByString: function(str){
       str = padZero(str, "000000");
@@ -48,7 +46,6 @@ var countdownToFunc = function(func, remainTimeSec, toSec){
     runningTimer = setInterval( function(){
        if (remainTimeSec > toSec) {
            $('#countdown').text(sec2hhmmss(remainTimeSec));
-           remainTimeSec = remainTimeSec - 1;
            //runningTimer = setTimeout(function() {countdownToFunc(func, remainTimeSec-1, toSec)}, 
                       //1000);
        }
@@ -56,8 +53,6 @@ var countdownToFunc = function(func, remainTimeSec, toSec){
           $('#countdown').text(sec2hhmmss(remainTimeSec));
           func.apply() 
        } 
-    },
-    1000);
 
 }
 
@@ -68,19 +63,18 @@ var countdown = function() {
        gTime.fix();
     }
     */
-    clearInterval(runningTimer);
     $(".numBtn").attr("disabled", true);
     $("#startBtn").attr("disabled", true);
-    countdownToFunc(playBell, gTime.toSec());
+    runningTimer = countdownToFunc(playBell, gTime.toSec());
 }
 var reset= function() {
-    clearInterval(runningTimer);
+    clearTimeout(runningTimer);
     $(".numBtn").attr("disabled", false);
     $("#startBtn").attr("disabled", false);
     $("#countdown").text(sec2hhmmss(gTime.toSec()));
 }
 var clearTime= function() {
-    clearInterval(runningTimer);
+    clearTimeout(runningTimer);
     gTime.reset();
     $(".numBtn").attr("disabled", false);
     $("#startBtn").attr("disabled", false);
@@ -153,17 +147,3 @@ $(document).ready(function() {
     //loadDing()
 });
 
-//for (var i = 0; i < 10; i){
-//   Mousetrap.bind(String(i), function() { $("#" + i).click() });
-//}
-Mousetrap.bind("0", function() { $("#0").click() });
-Mousetrap.bind("1", function() { $("#1").click() });
-Mousetrap.bind("2", function() { $("#2").click() });
-Mousetrap.bind("3", function() { $("#3").click() });
-Mousetrap.bind("4", function() { $("#4").click() });
-Mousetrap.bind("5", function() { $("#5").click() });
-Mousetrap.bind("6", function() { $("#6").click() });
-Mousetrap.bind("7", function() { $("#7").click() });
-Mousetrap.bind("8", function() { $("#8").click() });
-Mousetrap.bind("9", function() { $("#9").click() });
-Mousetrap.bind("enter", function() { $("#startBtn").click() });
