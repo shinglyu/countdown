@@ -33,13 +33,6 @@ var gTime = {
      if (this.sec  > 60 || this.sec  < 0) {return true;}
      return false;
    },
-   /*
-   fix: function(){
-     //if (this.hour > 24) {this.hour = 24;}
-     if (this.min  > 60) {this.min  = 59;}
-     if (this.sec  > 60) {this.sec  = 59;}
-   }
-   */
 }
 
 
@@ -47,18 +40,13 @@ var gTime = {
 
 var countdownToFunc = function(func, remainTimeSec, toSec){
    if (typeof toSec === "undefined") {toSec = 0;}
-   //remainTimeSec = remainTimeSec - 1; // for the 1st sec
-   //$('#countdown').text(sec2hhmmss(remainTimeSec));
    runningTimer = setInterval( function updateTime(){
       if (remainTimeSec > toSec) {
          $('#countdown').text(sec2hhmmss(remainTimeSec));
          remainTimeSec = remainTimeSec - 1;
-         //runningTimer = setTimeout(function() {countdownToFunc(func, remainTimeSec-1, toSec)}, 
-                 //1000);
       }
       else { //time's up!
         $("#countdown").text(sec2hhmmss(remainTimeSec));
-        //clearInterval(runningTimer);
         func.apply() 
         $("#resetBtn").click();
       } 
@@ -105,14 +93,9 @@ var sec2hhmmss = function(sec) {
    //var hh = hour % 24; //enable if day is used
    var hh = hour;
 
-   //if (hour > 24) {
-   //   alert("Day not implemented yet!");
-   //}
-
    //var day = Math.floor(hour/24)
 
    return padZero(hh,"00") + ":" + padZero(mm, "00") + ":" + padZero(ss, "00");
-   //return sprintf("%02d:%02d:%02d", hh, mm, ss);
 }
 
 var padZero = function(num, base){
@@ -152,22 +135,20 @@ var playDing= function() {
 }
 var flash = function() {
    var bgColor = $("body").css('background-color');
-   var colorNow = "white"; //css('background-color') return "rgb(255,0,0)"
+   //var lightOn = false; //css('background-color') return "rgb(255,0,0)"
    var intvId = setInterval(function(){
-     //if ($("body").css('background-color') == "red"){
-     if (colorNow == "white"){
-       $("body").css('background-color',"red");
-       colorNow = "red";
+     if ($("body").hasClass("bodyGlow")){
+       $("body").removeClass("bodyGlow");
      }
      else{ 
-       $("body").css('background-color',"white"); 
-       colorNow = "white";
+       $("body").addClass("bodyGlow");
      }
    }
    , 500);
    setTimeout(function(){
      clearInterval(intvId);
-     $("body").css('background-color', bgColor);
+     $("body").removeClass("bodyGlow");
+     //$("body").css('background-color', bgColor);
    }, 10000);
 }
 var bellAndFlash = function(){
@@ -176,18 +157,17 @@ var bellAndFlash = function(){
 }
 
 $(document).ready(function() {
-   //$("#next").text("Next: " + moveNames[exeId]);
-   //countdownToFunc(exercise, readyTimeout)
    loadBell()
    $('.numBtn').click(onNumClick)
    $("#countdown").text(sec2hhmmss(gTime.toSec()));
-
-   //loadDing()
 });
 
-//for (var i = 0; i < 10; i){
-//   Mousetrap.bind(String(i), function() { $("#" + i).click() });
-//}
+/*
+for (var i = 0; i < 10; i++){
+   Mousetrap.bind(String(i), function() { $("#" + String(i)).click() });
+}
+*/
+
 Mousetrap.bind("0", function() { $("#0").click() });
 Mousetrap.bind("1", function() { $("#1").click() });
 Mousetrap.bind("2", function() { $("#2").click() });
