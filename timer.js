@@ -160,6 +160,7 @@ $(document).ready(function() {
    loadBell()
    $('.numBtn').click(onNumClick)
    $("#countdown").text(sec2hhmmss(gTime.toSec()));
+   $("#countdown").fitText(0.5);
 });
 
 /*

@@ -26,7 +26,7 @@ h1, h2, h3, p {
 }
 
 h1 {
-   font-size:72pt;
+   /*font-size:72pt;*/
    font-family:"Share Tech Mono",Helvetica, Arial, sans-serif;
    font-weight:normal;
    color:#ffee11;
@@ -36,6 +36,7 @@ h1 {
 }
 #countdown{
    margin-top:0;
+   margin-bottom:0;
    padding-top:15pt;
 }
 
