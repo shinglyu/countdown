@@ -44,11 +44,12 @@ var gTime = {
 
 
 
+
 var countdownToFunc = function(func, remainTimeSec, toSec){
    if (typeof toSec === "undefined") {toSec = 0;}
    //remainTimeSec = remainTimeSec - 1; // for the 1st sec
    //$('#countdown').text(sec2hhmmss(remainTimeSec));
-   runningTimer = setInterval( function(){
+   runningTimer = setInterval( function updateTime(){
       if (remainTimeSec > toSec) {
          $('#countdown').text(sec2hhmmss(remainTimeSec));
          remainTimeSec = remainTimeSec - 1;
@@ -61,7 +62,9 @@ var countdownToFunc = function(func, remainTimeSec, toSec){
         func.apply() 
         $("#resetBtn").click();
       } 
-   },
+      return updateTime;
+   }(), //invoke once -> return itself for setInterval as param
+        //so no delay before setInterval starts
    1000);
 
 }
