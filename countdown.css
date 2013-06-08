@@ -69,4 +69,14 @@ button {
    border-width:3pt;
    border-color:#ffffff;
 }
+button:disabled{
+   font-family:"Share Tech Mono",Helvetica, Arial, sans-serif;
+   font-size:36pt;
+   color:#553322;
+   text-shadow: 0 0 0em #dd2200;
+
+   padding-right:10pt;
+   padding-left:10pt;
+
+}
 
