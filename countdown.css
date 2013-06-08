@@ -56,4 +56,17 @@ h1 {
 
 button {
    font-family:"Share Tech Mono",Helvetica, Arial, sans-serif;
+   font-size:36pt;
+   color:#ffee11;
+   text-shadow: 0 0 0.3em #dd2200;
+   text-shadow: 0 0 0.2em #ff6600;
+
+   padding-right:10pt;
+   padding-left:10pt;
+
+   background-color:#140c08;
+   border-radius:20pt;
+   border-width:3pt;
+   border-color:#ffffff;
 }
+
