@@ -1,7 +1,25 @@
-font
 css
   button
 
-flash and bell timout => reset
+//flash and bell timout => reset
 
+Merge start/reset buttons
+responsive buttons/help text => 2 col when landscape, 1 col when portrait
 
+00:00:00 flash bug
+
+reset will stop flash and ring
+
+keep 00:00:00 while flash
+
+add help text to indicate it's a countdown
+
+questionaire
+   new features:
+   keep rining until dismissed
+   show message when time's up
+   SMS?
+   Email?
+   Stopwatch
+   Alert every x sec and continue
+   Alert points
