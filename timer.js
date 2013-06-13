@@ -1,5 +1,8 @@
 var timeTimer = null;
 var flashTimer= null;
+
+alarmTimeout = 10000; //ms
+
 var gTime = {
    hour: 0,
    min:  0,
@@ -37,6 +40,28 @@ var gTime = {
 };
 
 
+var sec2hhmmss = function(sec) {
+   var ss = sec % 60;
+
+   var min= Math.floor(sec/60);
+   var mm = min % 60;
+
+   var hour = Math.floor(min/60);
+   //var hh = hour % 24; //enable if day is used
+   var hh = hour;
+
+   //var day = Math.floor(hour/24)
+
+   return padZero(hh,"00") + ":" + padZero(mm, "00") + ":" + padZero(ss, "00");
+}
+
+var padZero = function(num, base){
+   //e.g. padZero(5, 000) => 005
+   var zeroLen = String(base).length - String(num).length;
+   if (zeroLen > 0) {return new Array(zeroLen+1).join("0") + num;}
+                //zeroLen + 1 ""'s joined by 0's
+   else{return String(num);}
+}
 
 var timesUp = function(func, remainTimeSec){
      $("#countdown").text(sec2hhmmss(remainTimeSec));
@@ -64,12 +89,7 @@ var countdownToFunc = function(func, remainTimeSec, toSec){
 }
 
 var countdown = function() {
-   //if (gTime.needFix()){
-   //   $("#errorMsg").text(sec2hhmmss(gTime.toSec()) + " is not a valid time, so we fixed it for you.")
-      //gTime.fix();
-   //}
-   
-   $("#countdown").text("Ready...");
+   //$("#countdown").text("Ready...");
    clearInterval(timeTimer);
    countdownToFunc(bellAndFlash, gTime.toSec());
    $(".numBtn").attr("disabled", true);
@@ -85,34 +105,12 @@ var reset= function() {
 var clearTime= function() {
    clearInterval(timeTimer);
    stopFlash();
-   gTime.reset();
    $(".numBtn").attr("disabled", false);
    $("#startBtn").attr("disabled", false);
+   gTime.reset();
    $("#countdown").text(sec2hhmmss(gTime.toSec()));
 }
 
-var sec2hhmmss = function(sec) {
-   var ss = sec % 60;
-
-   var min= Math.floor(sec/60);
-   var mm = min % 60;
-
-   var hour = Math.floor(min/60);
-   //var hh = hour % 24; //enable if day is used
-   var hh = hour;
-
-   //var day = Math.floor(hour/24)
-
-   return padZero(hh,"00") + ":" + padZero(mm, "00") + ":" + padZero(ss, "00");
-}
-
-var padZero = function(num, base){
-   //e.g. padZero(5, 000) => 005
-   var zeroLen = String(base).length - String(num).length;
-   if (zeroLen > 0) {return new Array(zeroLen+1).join("0") + num;}
-                //zeroLen + 1 ""'s joined by 0's
-   else{return String(num);}
-}
 
 var onNumClick = function() {
    gTimeStr = gTime.toString();
@@ -146,19 +144,16 @@ var stopFlash = function() {
      clearInterval(flashTimer);
      $("body").removeClass("bodyGlow");
 }
+
 var flash = function() {
-   var bgColor = $("body").css('background-color');
+   //var bgColor = $("body").css('background-color');
    //var lightOn = false; //css('background-color') return "rgb(255,0,0)"
    flashTimer = setInterval(function(){
-     if ($("body").hasClass("bodyGlow")){
-       $("body").removeClass("bodyGlow");
-     }
-     else{ 
-       $("body").addClass("bodyGlow");
-     }
+     if ($("body").hasClass("bodyGlow")){ $("body").removeClass("bodyGlow"); }
+     else{ $("body").addClass("bodyGlow"); }
    }
    , 500);
-   setTimeout(stopFlash , 10000);
+   setTimeout(stopFlash , alarmTimeout);
 }
 
 var bellAndFlash = function(){
