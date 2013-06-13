@@ -157,8 +157,8 @@ var flash = function() {
 }
 
 var bellAndFlash = function(){
-   playBell();
    flash();
+   playBell();
 }
 
 $(document).ready(function() {
