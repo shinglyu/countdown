@@ -1,5 +1,4 @@
-var timeTimer = null;
-var flashTimer= null;
+var runningTimer = null;
 var gTime = {
    hour: 0,
    min:  0,
@@ -38,23 +37,22 @@ var gTime = {
 
 
 
-var timesUp = function(func, remainTimeSec){
+var timesUp = function(remainTimeSec){
      $("#countdown").text(sec2hhmmss(remainTimeSec));
      func.apply() 
-     clearInterval(timeTimer);
-     //$("#resetBtn").click();
+     $("#resetBtn").click();
 }
 
 var countdownToFunc = function(func, remainTimeSec, toSec){
    if (typeof toSec === "undefined") {toSec = 0;}
-   if (remainTimeSec == toSec) {timesUp(func, remainTimeSec); return;}
-   timeTimer = setInterval( function updateTime(){
+   if (remainTimeSec == toSec) {timesUp(remainTimeSec); return;}
+   runningTimer = setInterval( function updateTime(){
       if (remainTimeSec > toSec) {
          $('#countdown').text(sec2hhmmss(remainTimeSec));
          remainTimeSec = remainTimeSec - 1;
       }
       else { //time's up!
-         timesUp(func, remainTimeSec);
+         timesUp(remainTimeSec);
       } 
       return updateTime;
    }(), //invoke once -> return itself for setInterval as param
@@ -70,21 +68,19 @@ var countdown = function() {
    //}
    
    $("#countdown").text("Ready...");
-   clearInterval(timeTimer);
+   clearInterval(runningTimer);
    countdownToFunc(bellAndFlash, gTime.toSec());
    $(".numBtn").attr("disabled", true);
    $("#startBtn").attr("disabled", true);
 }
 var reset= function() {
-   clearInterval(timeTimer);
-   stopFlash();
+   clearInterval(runningTimer);
    $(".numBtn").attr("disabled", false);
    $("#startBtn").attr("disabled", false);
    $("#countdown").text(sec2hhmmss(gTime.toSec()));
 }
 var clearTime= function() {
-   clearInterval(timeTimer);
-   stopFlash();
+   clearInterval(runningTimer);
    gTime.reset();
    $(".numBtn").attr("disabled", false);
    $("#startBtn").attr("disabled", false);
@@ -133,23 +129,18 @@ var loadDing= function(){
 }
 var playBell= function() {
    $("#player1")[0].play()
-   //$(".numBtn").attr("disabled", false);
-   //$("#startBtn").attr("disabled", false);
+   $(".numBtn").attr("disabled", false);
+   $("#startBtn").attr("disabled", false);
 }
 var playDing= function() {
    $("#player2")[0].play()
-   //$(".numBtn").attr("disabled", false);
-   //$("#startBtn").attr("disabled", false);
-}
-
-var stopFlash = function() {
-     clearInterval(flashTimer);
-     $("body").removeClass("bodyGlow");
+   $(".numBtn").attr("disabled", false);
+   $("#startBtn").attr("disabled", false);
 }
 var flash = function() {
    var bgColor = $("body").css('background-color');
    //var lightOn = false; //css('background-color') return "rgb(255,0,0)"
-   flashTimer = setInterval(function(){
+   var intvId = setInterval(function(){
      if ($("body").hasClass("bodyGlow")){
        $("body").removeClass("bodyGlow");
      }
@@ -158,9 +149,12 @@ var flash = function() {
      }
    }
    , 500);
-   setTimeout(stopFlash , 10000);
+   setTimeout(function(){
+     clearInterval(intvId);
+     $("body").removeClass("bodyGlow");
+     //$("body").css('background-color', bgColor);
+   }, 10000);
 }
-
 var bellAndFlash = function(){
    playBell();
    flash();
